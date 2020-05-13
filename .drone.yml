@@ -22,7 +22,7 @@ steps:
       - go build -o hello
 
   - name: run
-    image: scratch
+    image: alpine:3.9.6
     commands:
       - ./hello
 
