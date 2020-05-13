@@ -25,4 +25,4 @@ steps:
     image: scratch
     commands:
       - ./hello
-    
+
