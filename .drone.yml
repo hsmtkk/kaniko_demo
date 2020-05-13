@@ -1,0 +1,28 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: yamllint
+    image: sdesbure/yamllint
+    commands:
+      - yamllint -d .drone.yml
+
+  - name: hadolint
+    image: hadolint/hadolint:v1.17.6
+    commands:
+      - hadolint Dockerfile
+
+  - name: build
+    image: golang:1.14
+    environment:
+      CGO_ENABLED: "0"
+    commands:
+      - go build -o hello
+
+  - name: run
+    image: scratch
+    commands:
+      - ./hello
+    
