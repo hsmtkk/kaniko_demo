@@ -7,7 +7,7 @@ steps:
   - name: yamllint
     image: sdesbure/yamllint
     commands:
-      - yamllint -d .drone.yml
+      - yamllint -d relaxed .drone.yml
 
   - name: hadolint
     image: hadolint/hadolint:v1.17.6
