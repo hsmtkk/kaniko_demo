@@ -8,6 +8,7 @@ steps:
     image: sdesbure/yamllint
     commands:
       - yamllint -d relaxed .drone.yml
+      - yamllint -d relaxed kaniko_manifest.yml
 
   - name: hadolint
     image: hadolint/hadolint:v1.17.6
@@ -26,3 +27,10 @@ steps:
     commands:
       - ./hello
 
+  - name: dockerhub
+    image: plugins/docker
+    settings:
+      repo: hsmtkk/kaniko_demo
+      username: hsmtkk
+      password:
+        from_secret: docker_hub_token

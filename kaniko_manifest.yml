@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  initContainers:
+    - name: git-sync
+      image: openweb/git-sync:0.0.1
+      env:
+        - name: GIT_SYNC_REPO
+          value: "https://github.com/hsmtkk/kaniko_demo"
+        - name: GIT_SYNC_DEST
+          value: "/tmp/kaniko_demo"
+        - name: GIT_SYNC_REV
+          value: "FETCH_HEAD"
+        - name: GIT_SYNC_WAIT
+          value: "10"
+  containers:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
+      args: ["--dockerfile=Dockerfile",
+             "--context=dir:///tmp/kaniko_demo",
+             "--destination=docker.io/hsmtkk/kaniko_demo"]
+  restartPolicy: Never
