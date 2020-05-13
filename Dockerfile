@@ -12,7 +12,7 @@ ENV CGO_ENABLED=0
 
 RUN go build  -o hello
 
-FROM scrach
+FROM scrach:latest
 
 COPY --from=builder /hello /hello
 
