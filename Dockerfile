@@ -12,7 +12,7 @@ ENV CGO_ENABLED=0
 
 RUN go build  -o hello
 
-FROM scrach:latest
+FROM alpine:3.9.6
 
 COPY --from=builder /hello /hello
 
