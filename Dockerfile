@@ -4,7 +4,7 @@ RUN mkdir -p /go/src/github.com/hsmtkk/kaniko_demo
 
 WORKDIR /go/src/github.com/hsmtkk/kaniko_demo
 
-COPY ./main.go .
+COPY ./hello.go .
 
 ENV CGO_ENABLED=0
 
