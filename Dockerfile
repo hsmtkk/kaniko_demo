@@ -8,7 +8,7 @@ COPY ./hello.go .
 
 ENV CGO_ENABLED=0
 
-RUN go build  -o hello
+RUN go build  -o hello && cp ./hello /hello
 
 FROM alpine:3.9.6
 
