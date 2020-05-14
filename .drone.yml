@@ -15,7 +15,21 @@ steps:
     commands:
       - hadolint Dockerfile
 
+  - name: gofmt
+    image: golang:1.14
+    commands:
+      - go fmt
+
+  - name: gotest
+    depends_on:
+      - gofmt
+    image: golang:1.14
+    commands:
+      - go test
+
   - name: build
+    depends_on:
+      - gotest
     image: golang:1.14
     environment:
       CGO_ENABLED: "0"
@@ -23,11 +37,16 @@ steps:
       - go build -o hello
 
   - name: run
+    depends_on:
+      - build
     image: alpine:3.9.6
     commands:
       - ./hello
 
   - name: dockerhub
+    depends_on:
+      - yamllint
+      - hadolint
     image: plugins/docker
     settings:
       repo: hsmtkk/kaniko_demo
